@@ -1,0 +1,22 @@
+enum BoardType {
+    ARRIVALS, DEPARTURES
+}
+
+enum FlightState {
+    LANDED, READY_FOR_TAKE_OFF, BOARDING, CANCELLED, DELAYED, IN_TIME, ARRIVING
+}
+
+type Flight {
+    id: ID!
+    start: String!
+    destination: String!
+    arrival: String!
+    departure: String!
+    status: FlightState!
+}
+
+type Board {
+    type: BoardType!
+    title: String!
+    flights: [Flight!]!
+}

@@ -1,0 +1,8 @@
+input FlightInput {
+    id: ID
+    start: String!
+    destination: String!
+    arrival: String!
+    departure: String!
+    status: FlightState!
+}

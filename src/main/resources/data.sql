@@ -1,21 +1,12 @@
-CREATE TABLE AUTHOR (
+CREATE TABLE FLIGHT (
     id int not null auto_increment,
-    name varchar(256) not null ,
-    thumbnail text
+    start varchar(256) not null,
+    destination varchar(256) not null,
+    arrival timestamp,
+    departure timestamp,
+    status enum('LANDED', 'READY_FOR_TAKE_OFF', 'BOARDING', 'CANCELLED', 'DELAYED', 'IN_TIME', 'ARRIVING')
 );
 
-INSERT INTO AUTHOR values (1, 'Author 1', 'thumbnail 1'), (2, 'Author 2', 'thumbnail 2');
-
-CREATE TABLE POST (
-    id int not null auto_increment,
-    category varchar(256),
-    text text,
-    title varchar(256) not null,
-    author_id int not null
-);
-
-ALTER TABLE POST ADD FOREIGN KEY (author_id) REFERENCES AUTHOR(id);
-
-INSERT INTO POST (id, category, text, title, author_id) VALUES
-    (1, null, 'text1', 'title1', 1),
-    (2, null, 'text2', 'title2', 2);
+INSERT INTO FLIGHT (id, start, destination, arrival, departure, status) VALUES
+    (1, 'Tegel', 'Tempelhof', '2022-01-01 10:00:00', '2022-01-01 12:00:00', 'IN_TIME'),
+    (2, 'Tegel', 'Teneriffa', '2022-01-01 10:15:00', '2022-01-01 17:00:00', 'READY_FOR_TAKE_OFF');
