@@ -62,15 +62,15 @@ public class Query implements GraphQLQueryResolver {
         //@formatter:on
     }
 
-    private boolean isDestination(String destination, Flight flight) {
+    private boolean isDestination(final String destination, final Flight flight) {
         return destination == null || flight.getDestination().equals(destination);
     }
 
-    private boolean isStart(String start, Flight flight) {
+    private boolean isStart(final String start, final Flight flight) {
         return start == null || flight.getStart().equals(start);
     }
 
-    private boolean isFlightState(FlightState status, Flight flight) {
+    private boolean isFlightState(final FlightState status, final Flight flight) {
         return status == null || flight.getStatus().equals(status);
     }
 }
