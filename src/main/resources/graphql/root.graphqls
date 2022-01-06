@@ -6,6 +6,10 @@ type Query {
 
 # The Root Mutation for the application
 type Mutation {
-    addFlight(flight: FlightInput): Flight!
+    addFlight(flight: FlightInput): Flight! 
     changeFlight(flight: FlightInput): Flight!
+}
+
+type Subscription {
+    flightChanged(start: String, destination: String): Flight!
 }

@@ -1,21 +1,20 @@
 package de.inmediasp.graphql.operations;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
 import de.inmediasp.graphql.persistence.Flight;
 import de.inmediasp.graphql.persistence.FlightRepository;
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Sinks;
 
 @Component
+@RequiredArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
     private final FlightRepository flightRepository;
-
-    @Autowired
-    public Mutation(final FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
+    
+    private final Sinks.Many<Flight> flightSink;
 
     public Flight addFlight(final FlightInput flight) {
         final Flight newFlight = Flight
@@ -27,7 +26,11 @@ public class Mutation implements GraphQLMutationResolver {
                 .status(flight.getStatus())
                 .build();
 
-        return flightRepository.save(newFlight);
+        final Flight savedFlight = flightRepository.save(newFlight);
+
+        flightSink.tryEmitNext(savedFlight);
+
+        return savedFlight;
     }
 
     public Flight changeFlight(final FlightInput flight) {
@@ -44,6 +47,10 @@ public class Mutation implements GraphQLMutationResolver {
         flightFromDb.setStart(flight.getStart());
         flightFromDb.setStatus(flight.getStatus());
 
-        return flightRepository.save(flightFromDb);
+        final Flight savedFlight = flightRepository.save(flightFromDb);
+
+        flightSink.tryEmitNext(savedFlight);
+
+        return savedFlight;
     }
 }
