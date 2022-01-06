@@ -6,6 +6,11 @@ enum FlightState {
     LANDED, READY_FOR_TAKE_OFF, BOARDING, CANCELLED, DELAYED, IN_TIME, ARRIVING
 }
 
+type Passenger {
+    id: ID!
+    name: String!
+}
+
 type Flight {
     id: ID!
     start: String!
@@ -13,6 +18,7 @@ type Flight {
     arrival: String!
     departure: String!
     status: FlightState!
+    passengers: [Passenger!]!
 }
 
 type Board {

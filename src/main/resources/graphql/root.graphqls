@@ -1,11 +1,11 @@
 # The Root Query for the application
 type Query {
     currentBoard(type: BoardType!, start: String, destination: String, status: FlightState): Board!
-#    flight(id: ID!): Flight!
+    flight(id: ID!): Flight!
 }
 
 # The Root Mutation for the application
-#type Mutation {
-#    addFlight(flight: FlightInput): Flight!
-#    changeFlight(flight: FlightInput): Flight!
-#}
+type Mutation {
+    addFlight(flight: FlightInput): Flight!
+    changeFlight(flight: FlightInput): Flight!
+}
