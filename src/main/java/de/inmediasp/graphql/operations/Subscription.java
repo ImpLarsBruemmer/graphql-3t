@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -20,7 +21,7 @@ public class Subscription implements GraphQLSubscriptionResolver {
 
     private final Flux<Flight> flightSource;
 
-    public Publisher<Flight> flightChanged(String start, String destination, final List<FlightState> states) {
+    public Publisher<Flight> flightChanged(final String start, final String destination, final Collection<FlightState> states) {
         Flux<Flight> flux = flightSource;
 
         if (start != null && !start.isBlank()) {

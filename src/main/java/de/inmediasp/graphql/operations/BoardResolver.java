@@ -38,35 +38,4 @@ public class BoardResolver implements GraphQLResolver<Board> {
                 ? flightRepository.findAll()
                 : flightRepository.findAllByStatusIn(states);
     }
-
-    private List<Flight> getArrivingFlights() {
-        return flightRepository.findAllByStatusIn(Arrays.asList(LANDED, DELAYED, IN_TIME, ARRIVING));
-    }
-
-    private List<Flight> getDepartingFlights() {
-        return flightRepository.findAllByStatusIn(Arrays.asList(READY_FOR_TAKE_OFF, BOARDING, CANCELLED));
-    }
-
-    private List<Flight> filterFlights(final List<Flight> flights, final FlightState status, final String start, final String destination) {
-        //@formatter:off
-        return flights
-                .stream()
-                .filter(flight -> isFlightState(status, flight))
-                .filter(flight -> isStart(start, flight))
-                .filter(flight -> isDestination(destination, flight))
-                .collect(Collectors.toList());
-        //@formatter:on
-    }
-
-    private boolean isDestination(final String destination, final Flight flight) {
-        return destination == null || flight.getDestination().equals(destination);
-    }
-
-    private boolean isStart(final String start, final Flight flight) {
-        return start == null || flight.getStart().equals(start);
-    }
-
-    private boolean isFlightState(final FlightState status, final Flight flight) {
-        return status == null || flight.getStatus().equals(status);
-    }
 }
