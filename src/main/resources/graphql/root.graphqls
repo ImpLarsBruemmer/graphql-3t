@@ -8,6 +8,8 @@ type Query {
 type Mutation {
     addFlight(flight: FlightInput): Flight! 
     changeFlight(flight: FlightInput): Flight!
+
+    login(email: String!, password: String!): User
 }
 
 type Subscription {

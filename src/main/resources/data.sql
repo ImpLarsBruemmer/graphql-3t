@@ -31,3 +31,15 @@ INSERT INTO PASSENGER (name) VALUES
     ( 'Hans Peter4' );
 
 INSERT INTO XREF_FLIGHT_PASSENGER VALUES (1, 1), (1, 2), (2, 3), (2, 4);
+
+CREATE TABLE USER (
+    id int not null auto_increment primary key,
+    email varchar(256) not null,
+    password varchar(64) not null,
+    role enum('ADMIN', 'USER')
+);
+
+INSERT INTO USER VALUES
+    (1, 'admin', '$2a$10$qP9dpBNKZ6.4M46tAGKnWus8dXHr2JsECjiX3VMz/ksYvzh30xnhO', 'ADMIN'),
+    (2, 'user', '$2a$10$rCxdMsq5jtNZd0IaP0L8N.dShw.cjD6TlxwNqd1w.M0tc49Oltsji', 'USER');
+

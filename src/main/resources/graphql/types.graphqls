@@ -26,3 +26,8 @@ type Board {
     title: String!
     flights(states: [FlightState!]): [Flight!]!
 }
+
+type User {
+    token: String
+    email: String
+}
