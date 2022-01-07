@@ -1,15 +1,16 @@
 package de.inmediasp.graphql.operations;
 
+import java.util.Collections;
+
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
 import de.inmediasp.graphql.persistence.Flight;
 import de.inmediasp.graphql.persistence.FlightRepository;
@@ -18,20 +19,17 @@ import de.inmediasp.graphql.security.UserService;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Sinks;
 
-import java.util.Collections;
-
 @Component
 @RequiredArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
     private final UserService userService;
     private final FlightRepository flightRepository;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationProvider authenticationProvider;
 
 
     private final Sinks.Many<Flight> flightSink;
 
-    @PreAuthorize("isAnonymous() or hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Flight addFlight(final FlightInput flight) {
         final Flight newFlight = Flight
                 .builder()
@@ -51,7 +49,7 @@ public class Mutation implements GraphQLMutationResolver {
         return savedFlight;
     }
 
-    @PreAuthorize("isAnonymous() or hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Flight changeFlight(final FlightInput flight) {
         return flightRepository
                 .findById(flight.getId())
