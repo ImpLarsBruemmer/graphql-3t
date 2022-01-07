@@ -9,11 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
-
 import de.inmediasp.graphql.persistence.Flight;
 import de.inmediasp.graphql.persistence.FlightRepository;
 import de.inmediasp.graphql.persistence.FlightState;
+import graphql.kickstart.tools.GraphQLResolver;
 
 import static de.inmediasp.graphql.persistence.FlightState.ARRIVING;
 import static de.inmediasp.graphql.persistence.FlightState.BOARDING;

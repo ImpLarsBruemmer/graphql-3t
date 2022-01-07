@@ -2,11 +2,12 @@ package de.inmediasp.graphql.config;
 
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.ObjectMapperConfigurer;
-import com.coxautodev.graphql.tools.ObjectMapperConfigurerContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import graphql.kickstart.tools.ObjectMapperConfigurer;
+import graphql.kickstart.tools.ObjectMapperConfigurerContext;
 
 @Component
 public class CustomObjectMapperConfigurer implements ObjectMapperConfigurer {

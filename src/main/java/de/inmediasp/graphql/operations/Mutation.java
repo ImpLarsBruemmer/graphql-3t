@@ -2,10 +2,9 @@ package de.inmediasp.graphql.operations;
 
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-
 import de.inmediasp.graphql.persistence.Flight;
 import de.inmediasp.graphql.persistence.FlightRepository;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Sinks;
 
@@ -13,7 +12,7 @@ import reactor.core.publisher.Sinks;
 @RequiredArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
     private final FlightRepository flightRepository;
-    
+
     private final Sinks.Many<Flight> flightSink;
 
     public Flight addFlight(final FlightInput flight) {

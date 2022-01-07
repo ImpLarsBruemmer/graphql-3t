@@ -3,7 +3,7 @@ package de.inmediasp.graphql.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.coxautodev.graphql.tools.SchemaParserOptions;
+import graphql.kickstart.tools.SchemaParserOptions;
 
 @Configuration
 public class GraphQLConfiguration {

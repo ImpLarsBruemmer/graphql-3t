@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
-
 import de.inmediasp.graphql.persistence.Flight;
 import de.inmediasp.graphql.persistence.Passenger;
 import de.inmediasp.graphql.persistence.PassengerRepository;
+import graphql.kickstart.tools.GraphQLResolver;
 
 @Component
 public class FlightResolver implements GraphQLResolver<Flight> {
