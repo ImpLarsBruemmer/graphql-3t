@@ -11,5 +11,5 @@ type Mutation {
 }
 
 type Subscription {
-    flightChanged(start: String, destination: String): Flight!
+    flightChanged(start: String, destination: String, states: [FlightState!]): Flight!
 }

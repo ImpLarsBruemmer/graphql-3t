@@ -33,10 +33,10 @@ public class BoardResolver implements GraphQLResolver<Board> {
     }
 
     @Transactional
-    public List<Flight> getFlights(final Board board) {
-        final List<Flight> flights = board.getType() == BoardType.ARRIVALS ? getArrivingFlights() : getDepartingFlights();
-
-        return filterFlights(flights, board.getStatus(), board.getStart(), board.getDestination());
+    public List<Flight> getFlights(final Board board, final List<FlightState> states) {
+        return states == null
+                ? flightRepository.findAll()
+                : flightRepository.findAllByStatusIn(states);
     }
 
     private List<Flight> getArrivingFlights() {

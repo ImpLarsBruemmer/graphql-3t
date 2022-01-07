@@ -9,6 +9,8 @@ import de.inmediasp.graphql.persistence.FlightRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Sinks;
 
+import java.util.Collections;
+
 @Component
 @RequiredArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
@@ -24,11 +26,13 @@ public class Mutation implements GraphQLMutationResolver {
                 .start(flight.getStart())
                 .destination(flight.getDestination())
                 .status(flight.getStatus())
+                .passengers(Collections.emptyList())
                 .build();
 
         final Flight savedFlight = flightRepository.save(newFlight);
 
         flightSink.tryEmitNext(savedFlight);
+
 
         return savedFlight;
     }
@@ -46,6 +50,7 @@ public class Mutation implements GraphQLMutationResolver {
         flightFromDb.setDestination(flight.getDestination());
         flightFromDb.setStart(flight.getStart());
         flightFromDb.setStatus(flight.getStatus());
+        flightFromDb.setPassengers(Collections.emptyList());
 
         final Flight savedFlight = flightRepository.save(flightFromDb);
 
