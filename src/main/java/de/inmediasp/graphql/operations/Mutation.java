@@ -31,7 +31,7 @@ public class Mutation implements GraphQLMutationResolver {
 
     private final Sinks.Many<Flight> flightSink;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("isAnonymous() or hasAuthority('ADMIN')")
     public Flight addFlight(final FlightInput flight) {
         final Flight newFlight = Flight
                 .builder()
@@ -51,7 +51,7 @@ public class Mutation implements GraphQLMutationResolver {
         return savedFlight;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("isAnonymous() or hasAuthority('ADMIN')")
     public Flight changeFlight(final FlightInput flight) {
         return flightRepository
                 .findById(flight.getId())
